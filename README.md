@@ -10,7 +10,7 @@
     }
   }
   ```
-* touch `.babelrc` to apply the babel-config
+* touch `.babelrc` to apply the babel-config (or modify `package.json`)
   ```js
    {
       "presets": ["react-app"],
@@ -31,4 +31,4 @@
 ```
 
 `.eslintrc`
-not yet apply the airbnb rules, the default rules come with `create-react-app` as `extends :'react-app'` in `package.json` seems all good;
+not yet apply the airbnb rules, the default rules come with `create-react-app` as above in `package.json` seems all good;
