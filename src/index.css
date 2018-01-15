@@ -3,3 +3,40 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.cart-item {
+  margin: 10px auto;
+}
+.cart-item div {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-item ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  width: 100px;
+}
+
+.cart-item ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  padding: 0;
+}
+
+.footer {
+  width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
