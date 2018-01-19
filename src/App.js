@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import './App.css';
-import { observable } from 'mobx';
+import { observable, when, autorun, whyRun } from 'mobx';
 import { inject } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 import styled from 'styled-components';
 
-const CartItem = observer(({ item, addNum, check, del }) => {
+const CartItem = observer(({ item, storeState }) => {
   return (
     <div
       className="cart-item"
@@ -14,33 +14,32 @@ const CartItem = observer(({ item, addNum, check, del }) => {
     >
       <div>
         <label>
-          <input type="checkbox" checked={item.checked} onChange={() => check(item.id)} />
+          <input
+            type="checkbox"
+            checked={item.checked}
+            onChange={() => storeState.check(item.id)}
+          />
         </label>
       </div>
       <div>{item.name}</div>
       <div>{item.price}</div>
       <ul>
-        <li onClick={() => addNum(item.id, 'minus')}>-</li>
+        <li onClick={() => storeState.addNum(item.id, 'minus')}>-</li>
         <li>{item.num}</li>
-        <li onClick={() => addNum(item.id, 'add')}>+</li>
+        <li onClick={() => storeState.addNum(item.id, 'add')}>+</li>
       </ul>
       <div>小计{item.price * item.num}</div>
 
-      <div onClick={() => del(item.id)}>删除</div>
+      <div onClick={() => storeState.del(item.id)}>删除</div>
     </div>
   );
 });
 
 const AllItems = inject(['storeState'])(
   observer(({ storeState }) => {
+    whyRun();
     return storeState.items.map(item => (
-      <CartItem
-        key={item.id}
-        item={item}
-        check={storeState.check}
-        addNum={storeState.addNum}
-        del={storeState.del}
-      />
+      <CartItem key={item.id} item={item} storeState={storeState} />
     ));
   })
 );
@@ -72,7 +71,7 @@ const Footer = inject(({ storeState }) => ({
 }))(
   observer(props => {
     console.log('props', props);
-
+    whyRun();
     return <div className="footer">总计: {props.total}</div>;
   })
 );
@@ -102,5 +101,25 @@ const Wrapper = styled.div`
     justify-content: center;
   }
 `;
+
+// autorun(() => {
+//   console.log('',);
+
+// })
+
+// when(
+//   () => {
+//     console.log('when');
+
+//     return storeState.items[0] && storeState.items[0].num === 10;
+//   },
+//   () => {
+//     alert('You have done');
+//   }
+// );
+
+// autorun(() => {
+//   console.log(storeState.items);
+// });
 
 export default App;

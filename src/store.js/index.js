@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { whyRun, autorun, observable, action, computed } from 'mobx';
 
 const items = [
   {
@@ -65,4 +65,6 @@ class StoreState {
   }
 }
 
-export default new StoreState();
+const storeState = new StoreState();
+
+export default storeState;
